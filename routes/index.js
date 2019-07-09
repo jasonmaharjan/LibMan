@@ -1,6 +1,5 @@
 var express = require('express');
 var router = express.Router();
-var index = '../views/index.html';
 var path = require('path');
 
 //Homepage
