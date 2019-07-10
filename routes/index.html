@@ -1,14 +1,58 @@
 <html>
 <head>
-  <title>
-    LibMan
-  </title>
+      <title>LibMan</title>
+      <link rel="stylesheet" href="css/index.css">
+      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
 </head>
   <body>
-    This is the Homepage where there is the option to choose between Employee login or borrower login.
-    <br><br>
-      <button type = "button" href='localhost:8000/users/employee_login'>EMPLOYEEE</button>
-    <br><br>
-      <button type = "button" href='/users/borrower_login'>BORROWER</button>
+      <header>
+          <h1>LibMan</h1>
+          <nav>
+            <ul>
+                  <li><a href="#"><i class="fa fa-home"></i>  Home</a></li>
+                  <li><a href="#"><i class="fa fa-map"></i> About</a></li>
+                  <li><a href="#"><i class="fa fa-address-book"></i> Services</a></li>
+                  <li><a href="#"><i class="fa fa-calendar"></i> FAQs</a></li>
+            </ul>
+          </nav> 
+      </header> 
+  <main>
+          <div class="container">
+                  <h2>Library Management System</h2>
+                  <p></p>
+                  <div class="search-box">
+                           <input class="search-txt" type="text" name="" placeholder="Type to search">
+                           <a class="search-btn" href="#"><i class="fas fa-search"></i></a>
+                  </div>
+                  <button type = "button" href='localhost:8000/users/employee_login'>EMPLOYEEE</button><br><br>
+                  <button type = "button" href='/users/borrower_login'>BORROWER</button>
+          </div> 
+  </main>
+  <h4>News and updates</h4>
+        <section class="grid">
+                 <div class="content">
+                        <p> Lorem, ipsum dolor sit amet consectetur adipisicing elit. Autem saepe adipisci repellat ea neque necessitatibus corrupti vero.
+                        Maiores nihil cumque adipisci temporibus impedit, reprehenderit nesciunt incidunt itaque placeat vero voluptate.</p>
+                </div>
+
+                <div class="content">
+                        <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+                        Perferendis nisi natus, consequatur placeat non maiores, aut voluptates praesentium nihil obcaecati unde? Animi ipsam eligendi sunt, 
+                </div>
+
+                <div class="content">
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+                        Eaque dolorem laboriosam odit iure mollitia atque, incidunt consequatur quis nam praesentium hic quas totam quia quos eius! Fugit eos aliquam asperiores!</p>
+                </div>
+        </section>
+      <footer>
+          <ul>
+          <li><a href="#">Contact us on:</a></li>
+          <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+          <li><a href="#"><i class="fab fa-google-plus"></i></a></li>
+          <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+          <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+          </ul>
+      </footer>
   </body>
 </html>
