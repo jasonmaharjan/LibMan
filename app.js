@@ -106,11 +106,11 @@ app.post('/query', function(req, res){
 
 
 // Displaying Query Route
-app.get('/show_results', function(req, res){
-  res.sendFile(path.join(__dirname + '/routes/show_results.html'));
+app.get('/query_results', function(req, res){
+  res.sendFile(path.join(__dirname + '/routes/query_results.html'));
 });
 
-app.post('/show_results', function(req, res){
+app.post('/query_results', function(req, res){
   con.query(
     // Add mySQL query here!
   )
