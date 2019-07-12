@@ -13,7 +13,7 @@ const exphbs = require('express-handlebars');
 var con = mysql.createConnection({
   host     : 'localhost',
 	user     : 'root',
-	password : '#jimmypage8877#',
+	password : '',
 	database : 'bookit'
 });
 
