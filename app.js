@@ -1,5 +1,4 @@
 const express = require('express');
-const path = require('path');
 const mysql = require('mysql');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
@@ -66,16 +65,29 @@ app.use(expressValidator({
   }
 }));
 
+// Initial Route
+app.get('/', function(req, res){
+  res.sendFile(path.join(__dirname+'/routes/index.html'));
+});
+
+app.post('/', function(req, res, next){
+  passport.authenticate('local', {
+    successRedirect:'/query',
+    failureRedirect:'/login',
+    failureFlash: true
+  })(req, res, next);
+});
+
 
 // Login Process
 app.get('/login', function(req, res){
-  res.sendFile(path.join(__dirname+'/borrower_login.html'));
+  res.sendFile(path.join(__dirname+'/routes/index.html'));
 });
 
 app.post('/login', function(req, res, next){
   passport.authenticate('local', {
-    successRedirect:'/books/home',
-    failureRedirect:'/users/login',
+    successRedirect:'/query',
+    failureRedirect:'/login',
     failureFlash: true
   })(req, res, next);
 });
@@ -83,7 +95,7 @@ app.post('/login', function(req, res, next){
 
 // Query Route
 app.get('/query', function(req, res){
-  res.sendFile(path.join(__dirname+'/query.html'));
+  res.sendFile(path.join(__dirname+'/routes/query.html'));
 });
 
 app.post('/query', function(req, res){
@@ -95,7 +107,7 @@ app.post('/query', function(req, res){
 
 // Displaying Query Route
 app.get('/show_results', function(req, res){
-  res.sendFile(path.join(__dirname + '/show_results.html'));
+  res.sendFile(path.join(__dirname + '/routes/show_results.html'));
 });
 
 app.post('/show_results', function(req, res){
@@ -107,9 +119,7 @@ app.post('/show_results', function(req, res){
 
 // Logout
 app.get('/logout', function(req, res){
-  req.logout();
-  req.flash('success', 'You are logged out');
-  res.redirect('/users/login');
+  res.redirect('/login');
 });
 
 // Start Server
