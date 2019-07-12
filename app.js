@@ -72,16 +72,19 @@ app.use(expressValidator({
   }
 }));
 
+// Login GET request
+app.get('/login', function(req, res){
+  
+});
 
-
-// Route Files
-let books = require('./routes/books');
-let users = require('./routes/users');
-let index = require('./routes/index');
-
-app.use('/', index);
-app.use('/books', books);
-app.use('/users', users);
+// Login Process
+app.post('/login', function(req, res, next){
+  passport.authenticate('local', {
+    successRedirect:'/books/home',
+    failureRedirect:'/users/login',
+    failureFlash: true
+  })(req, res, next);
+});
 
 
 // Start Server
