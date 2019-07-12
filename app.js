@@ -7,14 +7,15 @@ const expressValidator = require('express-validator');
 const flash = require('connect-flash');
 const session = require('express-session');
 const passport = require('passport');
-const exphbs = require('express-handlebars');
+const bcrypt = require('bcryptjs');
+var path = require('path');
 
 
 var con = mysql.createConnection({
   host     : 'localhost',
 	user     : 'root',
-	password : '',
-	database : 'bookit'
+	password : '#jimmypage8877#',
+	database : 'LibMan'
 });
 
 con.connect(function(err){
@@ -47,13 +48,6 @@ app.use(session({
   saveUninitialized: true
 }));
 
-// Express Messages Middleware
-app.use(require('connect-flash')());
-app.use(function (req, res, next) {
-  res.locals.messages = require('express-messages')(req, res);
-  next();
-});
-
 // Express Validator Middleware
 app.use(expressValidator({
   errorFormatter: function(param, msg, value) {
@@ -72,12 +66,12 @@ app.use(expressValidator({
   }
 }));
 
-// Login GET request
-app.get('/login', function(req, res){
-  
-});
 
 // Login Process
+app.get('/login', function(req, res){
+  res.sendFile(path.join(__dirname+'/borrower_login.html'));
+});
+
 app.post('/login', function(req, res, next){
   passport.authenticate('local', {
     successRedirect:'/books/home',
@@ -86,6 +80,37 @@ app.post('/login', function(req, res, next){
   })(req, res, next);
 });
 
+
+// Query Route
+app.get('/query', function(req, res){
+  res.sendFile(path.join(__dirname+'/query.html'));
+});
+
+app.post('/query', function(req, res){
+  con.query(
+    // Add mySQL query here!
+  )
+});
+
+
+// Displaying Query Route
+app.get('/show_results', function(req, res){
+  res.sendFile(path.join(__dirname + '/show_results.html'));
+});
+
+app.post('/show_results', function(req, res){
+  con.query(
+    // Add mySQL query here!
+  )
+});
+
+
+// Logout
+app.get('/logout', function(req, res){
+  req.logout();
+  req.flash('success', 'You are logged out');
+  res.redirect('/users/login');
+});
 
 // Start Server
 app.listen(8000, function(){
