@@ -6,6 +6,7 @@ var path = require('path');
 
 router.get('/'/*, ensureAuthenticated*/, function(req, res){
       res.sendFile(path.join(__dirname+'/index.html'));
+      res.render('layout', {title: 'Hello World'})
 });
 /*
 function ensureAuthenticated(req, res, next){

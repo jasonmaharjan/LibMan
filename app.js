@@ -1,14 +1,13 @@
 const express = require('express');
 const mysql = require('mysql');
-const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const expressValidator = require('express-validator');
 const flash = require('connect-flash');
 const session = require('express-session');
 const passport = require('passport');
 const bcrypt = require('bcryptjs');
-var path = require('path');
-
+const path = require('path');
+const hbs = require('express-handlebars');
 
 var con = mysql.createConnection({
   host     : 'localhost',
@@ -30,8 +29,9 @@ con.connect(function(err){
 const app = express();
 
 // Load View Engine
+app.engine('hbs', hbs({extname: 'hbs', defaultLayout: null, layoutsDir:__dirname + '/views/layouts/'}));
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'handlebars');
+app.set('view engine', 'hbs');
 
 //Body parser middleware
 app.use(bodyParser.json({type:'application/json'}));
@@ -67,7 +67,10 @@ app.use(expressValidator({
 
 // Initial Route
 app.get('/', function(req, res){
-  res.sendFile(path.join(__dirname+'/routes/index.html'));
+  //res.sendFile(path.join(__dirname+'/routes/index.html'));
+  res.render('layout',{
+    title: 'Hello World'
+  });
 });
 
 app.post('/', function(req, res, next){
@@ -81,7 +84,10 @@ app.post('/', function(req, res, next){
 
 // Login Process
 app.get('/login', function(req, res){
-  res.sendFile(path.join(__dirname+'/routes/index.html'));
+  //res.sendFile(path.join(__dirname+'/routes/index.html'));
+  res.render('index', {
+    title: 'Login page'
+  });
 });
 
 app.post('/login', function(req, res, next){
@@ -95,24 +101,30 @@ app.post('/login', function(req, res, next){
 
 // Query Route
 app.get('/query', function(req, res){
-  res.sendFile(path.join(__dirname+'/routes/query.html'));
+  res.render('query', {title: 'Query page'})
 });
 
 app.post('/query', function(req, res){
-  con.query(
-    // Add mySQL query here!
-  )
+
 });
 
 
 // Displaying Query Route
 app.get('/query_results', function(req, res){
-  res.sendFile(path.join(__dirname + '/routes/query_results.html'));
+  res.render('query_results', {title: 'Query results page'})
 });
 
 app.post('/query_results', function(req, res){
+  let title = req.body.title;
+  let isbn= req.body.ISBN;
+  let book_edition= req.body.edition;
+  let date = req.body.date;
+
   con.query(
-    // Add mySQL query here!
+    "SELECT * FROM LibMan where Title =? OR ISBN =? OR BookEdition = ? OR PublicationDate = ?",[title, isbn, book_edition, date], function(err, result){
+      res.render('query_results', {title: title, ISBN: isbn, book_edition: book_edition, date: date});
+    }
+
   )
 });
 
