@@ -111,7 +111,7 @@ app.post('/query', function(req, res){
 
 // Displaying Query Route
 app.get('/query_results', function(req, res){
-  res.render('query_results', {title: 'Query results page'})
+  res.render('query_results')
 });
 
 app.post('/query_results', function(req, res){
